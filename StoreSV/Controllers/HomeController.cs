@@ -139,6 +139,20 @@ namespace StoreSV.Controllers
 
         #endregion
 
+        [HttpPost]
+        public async Task<ActionResult> DeleteCategory(int id)
+        {
+            try
+            {
+                await database.DeleteCategoryAsync(id);
+                return Json(new { sucess = true });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, error = ex.Message });
+            }
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

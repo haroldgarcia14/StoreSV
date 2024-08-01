@@ -21,17 +21,23 @@ namespace StoreSV.Models
         //variable de referencia para entidades
         public DbSet<Usuario> Usuarios { get; set; }
 
+        public DbSet<Categoria> Categorias { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Usuario>().ToTable("USUARIO");
+            modelBuilder.Entity<Categoria>().ToTable("CATEGORIA");
 
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             base.OnModelCreating(modelBuilder);
         }
 
-        //crud
+
+
         /*********************USUARIO**********************/
         #region Usuario
+        //crud
+
         //crear
         public async Task CreateUserAsync(string nombre, string apellido, string correo,
             string clave, bool activo)
@@ -76,5 +82,53 @@ namespace StoreSV.Models
         }
         #endregion
         /****************Fin de Usuario********************/
+
+        /*********************CATEGORIA********************/
+        #region Categoria
+        //Crear
+        public async Task CreateCategoryAsync(string descripcion, bool activo)
+        {
+            try
+            {
+                var DescripcionParam = new SqlParameter("@Descripcion", descripcion);
+                var ActivoParam = new SqlParameter("@Activo", activo);
+
+                await Database.ExecuteSqlCommandAsync("EXECUTE sp_RegistrarCategoria @Descripcion, @Activo",
+                    DescripcionParam, ActivoParam);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al ejecutar sp_RegistrarCategoria. Detalles:" + ex.Message);
+            }
+        }
+
+        //Editar
+        public async Task EditCategoryAsync(int id, string descripcion, bool activo)
+        {
+            try
+            {
+                var idParam = new SqlParameter("@IdCategoria", id);
+                var DescripcionParam = new SqlParameter("@Descripcion", descripcion);
+                var ActivoParam = new SqlParameter("@Activo", activo);
+
+                await Database.ExecuteSqlCommandAsync("EXECUTE sp_EditarCategoria @IdCategoria, @Descripcion, @Activo",
+                    idParam, DescripcionParam, ActivoParam);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al ejecutar el sp_EditarCategoria. Detalles: " + ex.Message);
+            }
+        }
+
+        //eliminar
+        public async Task DeleteCategoryAsync(int id)
+        {
+            var IdParam = new SqlParameter("@IdCategoria", id);
+
+            await Database.ExecuteSqlCommandAsync("EXECUTE sp_EliminarCategoria @IdCategoria", IdParam);
+        }
+
+        #endregion
+        /****************Fin de Categoria******************/
     }
 }

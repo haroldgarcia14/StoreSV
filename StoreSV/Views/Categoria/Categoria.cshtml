@@ -1,0 +1,438 @@
+﻿
+@model IEnumerable<StoreSV.Models.Categoria>
+@{
+    ViewBag.Title = "Categoria";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid pt-4 px-4">
+
+    <div class="col-12">
+        <div class="bg-secondary rounded h-100 p-4">
+            <h6 class="mb-4">Categorias</h6>
+            <!--boton que abrira el modal-->
+            @*<button type="button" class="btn btn-success m-2" onclick="abrirModal()">Ingresar Empleados</button>*@
+            <button type="button" class="btn btn-success m-2" data-toggle="modal" onclick="abrirModal('Create',0)" data-target="#FormModal">Ingresar Categorias</button>
+
+            <div class="table-responsive">
+                <table id="tabla2" class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Descripcion</th>
+                            <th scope="col">Activo</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaBody">
+                        <!--cuerpo de la tabla-->
+                        @*Bucle razor*@
+                        @*condicion para validar si el modelo contiene datos o no*@
+                        @if (!Model.Any())
+                        {
+                            @*No contiene datos*@
+                            <tr><td colspan="3">No hay marcas para mostrar.</td></tr>
+                        }
+                        else
+                        {
+                            @*si contiene datos*@
+                            foreach (var item in Model)
+                            {
+                                <tr id="row-@item.IdCategoria">
+                                    <td>
+                                        @item.IdCategoria
+                                    </td>
+                                    <td>
+                                        @item.Descripcion
+                                    </td>
+                                    <td>
+                                        @if (item.Activo)
+                                        {
+                                            <span class="badge bg-success">Si</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-danger">No</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-sm btn-editar" data-id="@item.IdCategoria" data-toggle="modal" data-target="#FormModal" onclick="abrirModal('Edit',@item.IdCategoria)"><i class="fas fa-pen"></i></button>
+                                        <button type="button" class="btn btn-danger btn-sm ms-2 btn-eliminar" data-id="@item.IdCategoria"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                            }
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Table end-->
+<!--Modal para crear y editar-->
+<div class="modal fade" id="FormModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            @using (Html.BeginForm("CreateAndEditCategory", "Categoria", FormMethod.Post, new { role = "form", id = "CategoryForm" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="modal-header color-cabecera text-white">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Categorias</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+
+                    @*mostrar resumen de errores*@
+                    @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+
+                    <!--Id de usuario(oculto del modal)-->
+                    @*<input id="txtid" value="0" type="hidden" />*@
+                    @*@Html.EditorFor(model => model.First().idUsuario, new { id = "txtid" })*@
+                    <!--Id de categoria(oculto)-->
+                    @Html.HiddenFor(model => model.FirstOrDefault().IdCategoria, new { id = "txtid" })
+
+                    <!--para grillas 2x2-->
+                    <div class="row g-2">
+                        <div class="col-sm-6">
+                            @*<label for="txtdescripcion" class="form-label">Descripción</label>
+                                <input type="text" class="form-control" id="txtdescripcion" autocomplete="off" />*@
+                            @Html.LabelFor(model => model.FirstOrDefault().Descripcion, htmlAttributes: new { @class = "form-label" })
+                            @Html.EditorFor(model => model.FirstOrDefault().Descripcion, new { htmlAttributes = new { @class = "form-control", id = "txtdescripcion", placeholder = "Relojes", required = "required" } })
+                            @Html.ValidationMessageFor(model => model.FirstOrDefault().Descripcion, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="col-sm-6">
+                            @*<label for="cboactivo" class="form-label">Activo</label>
+                                <select id="cboactivo" class="form-select">
+                                    <option value="1">Si</option>
+                                    <option value="0">No</option>
+                                </select>*@
+                            @Html.LabelFor(model => model.FirstOrDefault().Activo, htmlAttributes: new { @class = "form-label" })
+                            @Html.DropDownListFor(model => model.FirstOrDefault().Activo, new List<SelectListItem>
+                       {
+                           new SelectListItem {Value = "true", Text = "Si"},
+                           new SelectListItem {Value = "false", Text = "No"}
+                       },
+                       htmlAttributes: new { @class = "form-select", id = "cboactivo", placeholder = "Seleccione una opcion", required = "required" })
+                        </div>
+
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary m-2" data-bs-dismiss="modal">Cerrar</button>
+                    @*<button type="button" class="btn btn-info m-2" onclick="Guardar()">Guardar</button>*@
+                    <button type="submit" class="btn btn-info m-2">Guardar</button>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+            ////accediendo al dom con fetch
+            //document.addEventListener('DOMContentLoaded', function () {
+            //    cargarCategorias();
+            //})
+
+        //ingreso de datos
+        @*
+            function guardarCategoria() {
+
+                /* formato de la data traia por json y
+                convertirlo a texto */
+                var formatoData = {
+                    IdCategoria: $('#txtid').val(),
+                    Descripcion: $('#txtdescripcion').val(),
+                    Activo: $('#cboactivo').val() == 1 ? true : false
+
+                };
+                debugger
+                //consumiendo metodo
+                fetch("@Url.Action("Create","Categoria")", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest' // este encabezado para evitar problemas con AntiForgery
+                    },
+                    data: JSON.stringify(formatoData),
+                    dataType: "json"
+                })
+                    .then(respuesta => {
+                        //si no da OK
+                        if (!respuesta.ok) {
+                            //personalizado
+                            throw new Error("Error en la solicitud POST");
+                        }
+                        //retornando
+                        return respuesta.json();
+                    })
+                    .then(datos => {
+                        //si da true
+                        debugger
+                        if (datos.success) {
+                            //llamando funcion para cargar de nuevo la tabla
+                            cargarCategorias();
+
+                            //cerrando modal
+                            $('#FormModal').modal('hide');
+                        } else {
+                            console.error("Error al guardar la categoria", datos.erros);
+                            alert('Error al guardar la categoria');
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error en la solicitud fetch", error);
+                        alert("Error en la solicitud fetch");
+                    })
+            }
+            *@
+
+            @*function cargarCategorias() {
+                fetch("@Url.Action("TablaCategoria", "Categoria")")
+                    .then(respuesta => respuesta.json())
+                    .then(datos => {
+                        const tablaBody = document.getElementById('tablaBody')
+                        tablaBody.innerHTML = ''
+                        datos.forEach(categoria => {
+                            const fila = document.createElement('tr')
+                            fila.innerHTML = `
+                                <td>${categoria.IdCategoria}</td>
+                                <td>${categoria.Descripcion}</td>
+                                <td>${estiloActivo(categoria.Activo)}</td>
+                                <td>
+                                     <button type="button" class="btn btn-sm btn-editar" data-toggle="modal" onclick="abrirModal('Edit',${categoria.IdCategoria})" data-target="#FormModal"><i class="fas fa-pen"></i></button>
+                                     <button type="button" class="btn btn-danger btn-sm ms-2 btn-eliminar"><i class="fas fa-trash"></i></button>
+                                </td>
+                            `
+                            tablaBody.appendChild(fila)
+                        })
+                    })
+                    .catch(error => {
+                        console.log("Error al cargar los datos de categoria", error);
+                    })
+            }*@
+
+        //funcion para renderizar la columna Activo con bootstrap
+        //function estiloActivo(activo) {
+        //    //activo == true
+        //    if (activo) {
+        //        return '<span class="badge bg-success">Si</span>'
+        //    } else {
+        //        return '<span class="badge bg-danger">No</span>';
+        //    }
+        //}
+
+        //abrir modal
+        //dependiendo de accion Create o Edit
+        //la accion seria el tipo de http y el id a ingresar o modificar
+        @*
+        function abrirModal(accion, id) {
+            const idcategory = document.getElementById('txtid');
+            const txtdescripcion = document.getElementById('txtdescripcion');
+            const cboactivo = document.getElementById('cboactivo');
+
+            //si es create o edit
+            if (accion === "Edit") {
+                //consumiendo con fetch el metodo a llamar en el controlador
+                fetch('@Url.Action("GetCategoria","Categoria")')
+                    .then(respuesta => {
+                        if (respuesta.ok) {
+                            throw new Error(" Error de respuesta de red");
+                        }
+                        return respuesta.json();
+                    })
+                    .then(data => {
+                        if (data.success) {
+                            const datos = data.data;
+                            idcategory.value = datos.IdCategoria;
+                            txtdescripcion.value = datos.Descripcion;
+                            cboactivo.value = data.Activo ? 'true' : 'false';
+                        } else {
+                            console.log(data.message);
+                        }
+                    })
+
+
+            } else if (accion === "Create") {
+                //campos vacios
+                idcategory.value = 0;
+                txtdescripcion.value = '';
+                cboactivo.value = true;
+            }
+            //llamando el modal
+            $("#FormModal").modal("show");
+        }
+        *@
+
+        function abrirModal(accion, userId) {
+            //definiendo la URL sea Edit o Create
+            if (accion === 'Edit') {
+                fetch(`@Url.Action("GetCategoria","Categoria")?id=${userId}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                    .then(respuesta => {
+
+                        //si no da OK, se mostrara el catch personalizado
+                        if (!respuesta.ok) {
+                            //personalizado
+                            throw new Error("Error en la solicitud GET");
+                        }
+                        return respuesta.json();
+                    })
+                    .then(respuesta => {
+                        if (respuesta.success) {
+                            //ver data en consola
+                            console.log(respuesta);
+                            //campos
+                            $('#txtid').val(respuesta.data.IdCategoria);
+                            $('#txtdescripcion').val(respuesta.data.Descripcion);
+                            $('#cboactivo').val(respuesta.data.Activo ? 'true' : 'false');
+
+                            $("#FormModal").modal("show");
+                        } else {
+                            console.log(respuesta.mesage);
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error en la solicitud fetch: ", error);
+                    })
+            } else {
+                $("#txtid").val(0);
+                $("#txtdescripcion").val("");
+                $("#cboactivo").val(1);
+
+                $("#FormModal").modal("show");
+            }
+        }
+
+        //guardar
+        @*
+        function guardarCategoria() {
+            debugger
+            const form = document.querySelector('#Form');
+            const formData = new FormData(form);
+
+            //consumiendo
+            fetch('@Url.Action("CreateCategoria","Categoria")', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest', // Para ASP.NET Core detecte una petición AJAX
+                    'RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val() // Token anti-falsificación
+                }
+            })
+                .then(respuesta => {
+                    if (!respuesta.ok) {
+                        throw new Error("Error en la solicitud POST");
+                    } else {
+                        return respuesta.json();
+                    }
+                })
+                .then(data => {
+                    //si da true
+                    if (data.success) {
+                        alert(data.message);
+                        $('#FormModal').modal('hide');
+                        cargarCategorias();
+                    } else {
+                        console.error('Error al crear la categoría:', data.errors);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error en la solicitud fetch:', error);
+                    // Maneja errores de red u otros errores no controlados
+                });
+        }*@
+
+        @*function guardarCategoria() {
+            var descripcion = document.getElementById('txtdescripcion').value
+            var activo = document.getElementById('cboactivo').value == 1 ? true : false;
+
+            $.ajax({
+
+                url: '@Url.Action("CreateCategoria","Categoria")',
+                type: 'POST',
+                dataType: 'json',
+                data: { descripcion: descripcion, activo: activo },
+
+                success: function (respuesta) {
+                    debugger
+                    if (respuesta.success) {
+                        alert('Categoría creada exitosamente.');
+                        $('#FormModal').modal('hide');
+                        cargarCategorias();
+                    } else {
+                        alert('Error al crear la categoría: ' + response.message);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    alert('Error del servidor al crear la categoría.');
+                    console.error(xhr);
+                }
+            })
+        }*@
+
+
+        $(document).ready(function () {
+            $('.btn-eliminar').on('click', function () {
+                var userId = $(this).data('id');
+                var btn = $(this); //referencia al boton
+                console.log(userId);
+                //editando funcion de sweetalert2
+                swal.fire({
+                    title: "Eliminar categoria",
+                    text: "¿Desea eliminar la categoria?",
+                    icon: "warning",
+                    background: "#000",
+                    color: "#fff",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Sí",
+                    cancelButtonText: "No"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        swal.fire({
+                            title: "Eliminado!",
+                            text: "El registro ha sido eliminado",
+                            icon: "success",
+                            background: "#000",
+                            color: "#fff"
+                        })
+                        $.ajax({
+                         url: '@Url.Action("Delete", "Categoria")',
+                         type: 'POST',
+                         data: { id: userId },
+                         success: function (respuesta) {
+                             console.log('Respuesta del servidor:', respuesta);
+                             console.log(respuesta.success);
+                             if (respuesta.success) {
+                                 btn.closest('tr').fadeOut('slow', function () {
+                                     $(this).remove(); //elimina la fila del DOM
+                                 })
+
+                             } else {
+                                 alert(`Error: ` + respuesta.error);
+                             }
+                         },
+                         error: function (xhr, status, error) {
+                                console.log('Error AJAX:', xhr, status, error);
+                                alert('Error al intentar eliminar la categoría');
+                         }
+                        })
+                    }
+                })
+            })
+        })
+    </script>
+}
