@@ -23,10 +23,13 @@ namespace StoreSV.Models
 
         public DbSet<Categoria> Categorias { get; set; }
 
+        public DbSet<Marca> Marcas { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Usuario>().ToTable("USUARIO");
             modelBuilder.Entity<Categoria>().ToTable("CATEGORIA");
+            modelBuilder.Entity<Marca>().ToTable("MARCA");
 
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             base.OnModelCreating(modelBuilder);
@@ -130,5 +133,54 @@ namespace StoreSV.Models
 
         #endregion
         /****************Fin de Categoria******************/
+
+        /*********************Marca************************/
+        #region Marca
+        //registrar
+        public async Task CreateBrandAsync(string descripcion, bool activo)
+        {
+            try
+            {
+                var DescripcionParam = new SqlParameter("@Descripcion", descripcion);
+                var activoParam = new SqlParameter("@Activo", activo);
+                Console.WriteLine(DescripcionParam);
+                Console.WriteLine(activoParam);
+
+
+                await Database.ExecuteSqlCommandAsync("EXECUTE sp_RegistrarMarca @Descripcion, @Activo", DescripcionParam, activoParam);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al ejecutar el sp_RegistrarMarca. Detalles: " + ex.Message);
+            }
+        }
+
+        //Editar
+        public async Task EditBrandAsync(int id, string descripcion, bool activo)
+        {
+            try
+            {
+                var idParam = new SqlParameter("@IdMarca", id);
+                var DescripcionParam = new SqlParameter("@Descripcion", descripcion);
+                var ActivoParam = new SqlParameter("@Activo", activo);
+
+                await Database.ExecuteSqlCommandAsync("EXECUTE sp_EditarMarca @IdMarca, @Descripcion, @Activo",
+                    idParam, DescripcionParam, ActivoParam);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al ejecutar el sp_EditarCategoria. Detalles: " + ex.Message);
+            }
+        }
+
+        //Eliminar
+        public async Task DeleteBrandAsync(int id)
+        {
+            var IdParam = new SqlParameter("@IdMarca", id);
+
+            await Database.ExecuteSqlCommandAsync("EXECUTE sp_EliminarMarca @IdMarca", IdParam);
+        }
+        #endregion
+        /****************Fin de Marca**********************/
     }
 }

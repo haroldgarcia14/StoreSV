@@ -15,11 +15,13 @@ namespace StoreSV.Controllers
         //    return View();
         //}
 
+        //variable constante
         private readonly StoreSVEntities database;
 
         //constructor
         public HomeController()
         {
+            //creando instancia
             database = new StoreSVEntities();
         }
 
@@ -138,20 +140,6 @@ namespace StoreSV.Controllers
         }
 
         #endregion
-
-        [HttpPost]
-        public async Task<ActionResult> DeleteCategory(int id)
-        {
-            try
-            {
-                await database.DeleteCategoryAsync(id);
-                return Json(new { sucess = true });
-            }
-            catch (Exception ex)
-            {
-                return Json(new { success = false, error = ex.Message });
-            }
-        }
 
         public ActionResult About()
         {

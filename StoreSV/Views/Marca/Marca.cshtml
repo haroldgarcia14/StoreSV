@@ -1,0 +1,275 @@
+﻿@*Modelo a usar*@
+@model IEnumerable<StoreSV.Models.Marca>
+@{
+    ViewBag.Title = "Marca";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*Estructura razor*@
+
+<button type="button" class="btn btn-success m-2" data-toggle="modal" onclick="abrirModal('Create',0)" data-target="#FormModal">Ingresar Marcas</button>
+
+<!--Modal para crear y editar-->
+<div class="modal fade" id="FormModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            @* Usar una verificación condicional para evitar errores cuando Model está vacío *@
+            @using (Html.BeginForm("CreateAndEditBrand", "Marca", FormMethod.Post, new { role = "form", id = "BrandForm" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="modal-header color-cabecera text-white">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Marcas</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+
+                    @*mostrar resumen de errores*@
+                    @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+
+                    <!--Id de usuario(oculto del modal)-->
+                    @*<input id="txtid" value="0" type="hidden" />*@
+                    @*@Html.EditorFor(model => model.First().idUsuario, new { id = "txtid" })*@
+                    <!--Id de categoria(oculto)-->
+                    @*@if(Model.Any()) {*@
+                    @Html.HiddenFor(model => model.FirstOrDefault().IdMarca, new { id = "txtid" })
+                    @*}else {
+                            @Html.Hidden("txtid", "", new { id = "txtid" })
+                        }*@
+
+                    <!--para grillas 2x2-->
+                    <div class="row g-2">
+                        <div class="col-sm-6">
+                            @*<label for="txtdescripcion" class="form-label">Descripción</label>
+                                <input type="text" class="form-control" id="txtdescripcion" autocomplete="off" />*@
+                            @Html.LabelFor(model => model.FirstOrDefault().Descripcion, htmlAttributes: new { @class = "form-label" })
+                            @*@if (Model.Any())
+                                {*@
+                            @Html.EditorFor(model => model.FirstOrDefault().Descripcion, new { htmlAttributes = new { @class = "form-control", id = "txtdescripcion", placeholder = "Adidas", required = "required" } })
+                            @Html.ValidationMessageFor(model => model.FirstOrDefault().Descripcion, "", new { @class = "text-danger" })
+                            @*}
+                                else
+                                {
+                                    @Html.TextBox("txtdescripcion", null, new {  @class = "form-control", id = "txtdescripcion", placeholder = "Adidas", required = "required"  })
+                                    @Html.ValidationMessage("txtdescripcion", "", new { @class = "text-danger" });
+                                }*@
+
+                        </div>
+
+                        <div class="col-sm-6">
+                            @*<label for="cboactivo" class="form-label">Activo</label>
+                                <select id="cboactivo" class="form-select">
+                                    <option value="1">Si</option>
+                                    <option value="0">No</option>
+                                </select>*@
+                            @Html.LabelFor(model => model.FirstOrDefault().Activo, htmlAttributes: new { @class = "form-label" })
+                            @*@if (Model.Any())
+                                {*@
+                            @Html.DropDownListFor(model => model.FirstOrDefault().Activo, new List<SelectListItem>
+                            {
+                            new SelectListItem {Value = "true", Text = "Si"},
+                            new SelectListItem {Value = "false", Text = "No"}
+                            },
+                            htmlAttributes: new { @class = "form-select", id = "cboactivo", placeholder = "Seleccione una opcion", required = "required" })
+                            @*}
+                                else
+                                {
+                                    @Html.DropDownList("cboactivo", new List<SelectListItem>
+                                   {
+                                       new SelectListItem {Value = "true", Text = "Si"},
+                                       new SelectListItem {Value = "false", Text = "No"}
+                                   },
+                                   htmlAttributes: new { @class = "form-select", id = "cboactivo", placeholder = "Seleccione una opcion", required = "required" })
+                                }*@
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary m-2" data-bs-dismiss="modal">Cerrar</button>
+                    @*<button type="button" class="btn btn-info m-2" onclick="Guardar()">Guardar</button>*@
+                    <button type="submit" class="btn btn-info m-2">Guardar</button>
+                </div>
+            }
+
+
+
+        </div>
+    </div>
+</div>
+
+<!--Table-->
+<div class="container-fluid pt-4 px-4">
+
+    <div class="col-12">
+        <div class="bg-secondary rounded h-100 p-4">
+            <h6 class="mb-4">Marcas</h6>
+            <!--boton que abrira el modal-->
+            @*<button type="button" class="btn btn-success m-2" onclick="abrirModal()">Ingresar Empleados</button>*@
+
+
+            <div class="table-responsive">
+                <table id="tabla2" class="table">
+                    <thead>
+                        <tr>
+                            @*<th scope="col">#</th>*@
+                            <th scope="col">Descripcion</th>
+                            <th scope="col">Activo</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaBody">
+                        <!--cuerpo de la tabla-->
+                        @*Bucle razor*@
+                        @*condicion para validar si el modelo contiene datos o no*@
+                        @if (!Model.Any())
+                        {
+                            @*No contiene datos*@
+                            <tr><td colspan="3">No hay marcas para mostrar.</td></tr>
+                        }
+                        else
+                        {
+                            @*si contiene datos*@
+                            foreach (var item in Model)
+                            {
+                                <tr id="row-@item.IdMarca">
+                                    @*<td>
+                                            @item.IdMarca
+                                        </td>*@
+                                    <td>
+                                        @item.Descripcion
+                                    </td>
+                                    <td>
+                                        @if (item.Activo)
+                                        {
+                                            <span class="badge bg-success">Si</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-danger">No</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-sm btn-editar" data-id="@item.IdMarca" data-toggle="modal" data-target="#FormModal" onclick="abrirModal('Edit',@item.IdMarca)"><i class="fas fa-pen"></i></button>
+                                        <button type="button" class="btn btn-danger btn-sm ms-2 btn-eliminar" data-id="@item.IdMarca"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Table end-->
+
+
+
+@section scripts{
+    <script>
+
+            function abrirModal(accion, userId) {
+            //definiendo la URL sea Edit o Create
+                debugger
+                if (accion === 'Edit') {
+                fetch(`@Url.Action("GetMarca","Marca")?id=${userId}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                    .then(respuesta => {
+                        //si no da OK, se mostrara el catch personalizado
+
+                        if (!respuesta.ok) {
+                            //personalizado
+                            throw new Error("Error en la solicitud GET");
+                        }
+                        return respuesta.json();
+                    })
+                    .then(respuesta => {
+
+                        if (respuesta.success) {
+                            //ver data en consola
+                            console.log(respuesta);
+                            //campos
+
+                            $('#txtid').val(respuesta.data.IdMarca);
+                            $('#txtdescripcion').val(respuesta.data.Descripcion);
+                            $('#cboactivo').val(respuesta.data.Activo ? 'true' : 'false');
+
+                            $("#FormModal").modal("show");
+                        } else {
+                            console.log(respuesta.message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error en la solicitud fetch: ", error);
+                    })
+            } else {
+                $("#txtid").val(0);
+                $("#txtdescripcion").val("");
+                $("#cboactivo").val(1);
+
+                $("#FormModal").modal("show");
+            }
+        }
+
+            //eliminar
+        $(document).ready(function () {
+            $('.btn-eliminar').on('click', function () {
+                var Id = $(this).data('id');
+                var button = $(this);
+
+                //sweetalert2
+                swal.fire({
+                    title: "Eliminar Marca",
+                    text: "¿Desea eliminar la marca?",
+                    icon: "warning",
+                    background: "#000",
+                    color: "#fff",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Sí",
+                    cancelButtonText: "No"
+                }).then((result) => {
+                    //si resultado es confirmado
+                    if (result.isConfirmed) {
+                        swal.fire({
+                            title: "Eliminado!",
+                            text: "El registro ha sido eliminado",
+                            icon: "success",
+                            background: "#000",
+                            color: "#fff"
+                        })
+                        $.ajax({
+                            url: '@Url.Action("Delete","Marca")',
+                            type: 'POST',
+                            data: { id: Id },
+                            success: function (response) {
+                                console.log(response);
+                                if (response.success) {
+                                    button.closest('tr').fadeOut('slow', function () {
+                                        $(this).remove();
+                                    })
+                                } else {
+                                    alert(`Error: ` + response.error);
+                                }
+                            },
+                            error: function () {
+                                alert('Error al intentar eliminar la marca');
+                            }
+                        })
+                    }
+                })
+            })
+        })
+    </script>
+}

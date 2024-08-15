@@ -8,77 +8,70 @@ using System.Web.Mvc;
 
 namespace StoreSV.Controllers
 {
-    public class CategoriaController : Controller
+    public class MarcaController : Controller
     {
-        // GET: Categoria
+        // GET: Marca
         //public ActionResult Index()
         //{
         //    return View();
         //}
 
         //variable constante
-        private readonly StoreSVEntities databaseCategoria;
+        private readonly StoreSVEntities databaseMarca;
 
         //constructor
-        public CategoriaController()
+        public MarcaController()
         {
             //creando instancia
-            databaseCategoria = new StoreSVEntities();
+            databaseMarca = new StoreSVEntities();
         }
 
-        #region CATEGORIA
-        //para que cargue el html(razor)
-        public ActionResult Categoria()
+        #region MARCA
+
+        //CRUD
+
+        //vista
+        public ActionResult Marca()
         {
-            var CategoriaActivos = databaseCategoria.Categorias.Where(c => c.Activo);
-            return View(CategoriaActivos);
+            var marcaActivos = databaseMarca.Marcas.Where(m => m.Activo).ToList();
+            return View(marcaActivos);
         }
 
-        // GET: Categoria
-        //devolver la lista de las categorias
+        //devolver la lista
         [HttpGet]
-        public JsonResult TablaCategoria()
+        public JsonResult GetMarca(int id)
         {
-            var CategoriaActivos = databaseCategoria.Categorias.Where(u => u.Activo).ToList();
-            return Json(CategoriaActivos, JsonRequestBehavior.AllowGet);
-        }
-
-        //para obtener los datos de un id
-        public JsonResult GetCategoria(int id)
-        {
-            var categoria = databaseCategoria.Categorias.Find(id);
-            if (categoria == null)
+            var marca = databaseMarca.Marcas.Find(id);
+            if(marca == null)
             {
-                return Json(new { success = false, message = "Categoria no encontrado" });
+                return Json(new { success = false, message = "Marca no encontrado" });
             }
             else
             {
-                var categoriaData = new
+                var marcaData = new
                 {
-                    IdCategoria = categoria.IdCategoria,
-                    Descripcion = categoria.Descripcion,
-                    Activo = categoria.Activo
+                    IdMarca = marca.IdMarca,
+                    Descripcion = marca.Descripcion,
+                    Activo = marca.Activo
                 };
-
-                return Json(new { success = true, data = categoriaData }, JsonRequestBehavior.AllowGet);
+                return Json(new { success = true, data = marcaData }, JsonRequestBehavior.AllowGet);
             }
         }
 
-        //Crear y editar categorias
-        //POST
+        //Crear y editar Marcas
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> CreateAndEditCategory(Categoria categoria)
+        public async Task<ActionResult> CreateAndEditBrand(Marca marca)
         {
-            Console.WriteLine(categoria);
-            if (categoria.IdCategoria > 0)
+            if (marca.IdMarca > 0)
             {
                 if (ModelState.IsValid)
                 {
                     try
                     {
-                        await databaseCategoria.EditCategoryAsync(categoria.IdCategoria, categoria.Descripcion, categoria.Activo);
-                        return RedirectToAction(nameof(Categoria));
+                        Console.WriteLine(marca);
+                        await databaseMarca.EditBrandAsync(marca.IdMarca, marca.Descripcion, marca.Activo);
+                        return RedirectToAction(nameof(Marca));
                     }
                     catch (Exception ex)
                     {
@@ -94,14 +87,15 @@ namespace StoreSV.Controllers
                     }
                 }
             }
-            else if (categoria.IdCategoria == 0)
+            else if (marca.IdMarca == 0)
             {
                 if (ModelState.IsValid)
                 {
                     try
                     {
-                        await databaseCategoria.CreateCategoryAsync(categoria.Descripcion, categoria.Activo);
-                        return RedirectToAction(nameof(Categoria));
+                        Console.WriteLine(marca);
+                        await databaseMarca.CreateBrandAsync(marca.Descripcion, marca.Activo);
+                        return RedirectToAction(nameof(Marca));
                     }
                     catch (Exception ex)
                     {
@@ -122,19 +116,19 @@ namespace StoreSV.Controllers
                 return HttpNotFound();
             }
 
-            return View(categoria);
+            return View(marca);
         }
 
-        //eliminar
+        //Eliminar
         [HttpPost]
         public async Task<ActionResult> Delete(int id)
         {
             try
             {
-                await databaseCategoria.DeleteCategoryAsync(id);
+                await databaseMarca.DeleteBrandAsync(id);
                 return Json(new { success = true });
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return Json(new { success = false, error = ex.Message });
             }
