@@ -22,5 +22,7 @@ namespace StoreSV.Models
 
         //se hace referencia a activo o inactivo
         public bool Activo { get; set; }
+
+        //public virtual ICollection<Producto> Productos { get; set; }
     }
 }

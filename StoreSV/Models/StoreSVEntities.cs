@@ -1,6 +1,7 @@
 ﻿using Isopoh.Cryptography.Argon2;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Data.SqlClient;
@@ -25,11 +26,14 @@ namespace StoreSV.Models
 
         public DbSet<Marca> Marcas { get; set; }
 
+        public DbSet<Producto> Productos { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Usuario>().ToTable("USUARIO");
             modelBuilder.Entity<Categoria>().ToTable("CATEGORIA");
             modelBuilder.Entity<Marca>().ToTable("MARCA");
+            modelBuilder.Entity<Producto>().ToTable("PRODUCTO");
 
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             base.OnModelCreating(modelBuilder);
@@ -182,5 +186,82 @@ namespace StoreSV.Models
         }
         #endregion
         /****************Fin de Marca**********************/
+
+        /*********************Producto************************/
+        #region Producto
+
+        //Registrar
+        public async Task CreateProductoAsync(string nombre, int IdCategoria, int IdMarca, decimal precio, 
+            int stock, string rutaImagen, string nombreImagen, bool activo)
+        {
+            try
+            {
+                /*
+                var NombreParam = new SqlParameter("@Nombre", nombre);
+                var IdCategoriaParam = new SqlParameter("@IdCategoria", IdCategoria);
+                var IdMarcaParam = new SqlParameter("@IdMarca", IdMarca);
+                var PrecioParam = new SqlParameter("@Precio", precio);
+                var StockParam = new SqlParameter("@Stock", stock);
+                var RutaImagenParam = new SqlParameter("@RutaImagen", rutaImagen);
+                var NombreImagenParam = new SqlParameter("@NombreImagen",nombreImagen);
+                var ActivoParam = new SqlParameter("@Activo",activo);
+                */
+                var NombreParam = new SqlParameter("@Nombre", SqlDbType.VarChar, 100) {Value = nombre ?? (object)DBNull.Value };
+                var IdCategoriaParam = new SqlParameter("@IdCategoria", SqlDbType.Int) {Value = IdCategoria };
+                var IdMarcaParam = new SqlParameter("@IdMarca", SqlDbType.Int) {Value = IdMarca };
+                var PrecioParam = new SqlParameter("@Precio", SqlDbType.Decimal) { Value = precio };
+                var StockParam = new SqlParameter("@Stock", SqlDbType.Int) { Value = stock };
+                var RutaImagenParam = new SqlParameter("@RutaImagen", SqlDbType.VarChar, -1) {Value = rutaImagen ?? (object)DBNull.Value };
+                var NombreImagenParam = new SqlParameter("@NombreImagen", nombreImagen);
+                var ActivoParam = new SqlParameter("@Activo", activo);
+
+                await Database.ExecuteSqlCommandAsync("EXECUTE sp_RegistrarProducto @Nombre, @IdCategoria, @IdMarca, @Precio, @Stock, @RutaImagen, @NombreImagen, @Activo",NombreParam,IdCategoriaParam,IdMarcaParam,PrecioParam,StockParam,RutaImagenParam,NombreImagenParam,ActivoParam);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al ejecutar el sp_RegistrarProducto. Detalles: " + ex.Message);
+            }
+        }
+
+        //Editar
+        public async Task EditProductAsync(int id, string nombre, int IdCategoria, int IdMarca, decimal precio, int stock, string rutaImagen, string nombreImagen, bool activo)
+        {
+            try
+            {
+                var idParam = new SqlParameter("@IdProducto", SqlDbType.Int) { Value = id };
+                var NombreParam = new SqlParameter("@Nombre", SqlDbType.VarChar, 100) { Value = nombre ?? (object)DBNull.Value };
+                var IdCategoriaParam = new SqlParameter("@IdCategoria", SqlDbType.Int) { Value = IdCategoria };
+                var IdMarcaParam = new SqlParameter("@IdMarca", SqlDbType.Int) { Value = IdMarca };
+                var PrecioParam = new SqlParameter("@Precio", SqlDbType.Decimal) { Value = precio };
+                var StockParam = new SqlParameter("@Stock", SqlDbType.Int) { Value = stock };
+                var RutaImagenParam = new SqlParameter("@RutaImagen", SqlDbType.VarChar, -1) { Value = rutaImagen ?? (object)DBNull.Value };
+                var NombreImagenParam = new SqlParameter("@NombreImagen", nombreImagen);
+                var ActivoParam = new SqlParameter("@Activo", activo);
+
+                await Database.ExecuteSqlCommandAsync("EXECUTE sp_EditarProducto @IdProducto, @Nombre, @IdCategoria, @IdMarca, @Precio, @Stock, @RutaImagen, @NombreImagen, @Activo", idParam, NombreParam, IdCategoriaParam, IdMarcaParam, PrecioParam, StockParam, RutaImagenParam, NombreImagenParam, ActivoParam);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error al ejecutar el sp_RegistrarProducto. Detalles: " + ex.Message);
+            }
+        }
+
+        //Eliminar
+        public async Task DeleteProductAsync(int id)
+        {
+            try
+            {
+                var idParam = new SqlParameter("@IdProducto", id);
+
+                await Database.ExecuteSqlCommandAsync("EXECUTE sp_EliminarProducto @IdProducto", idParam);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error al ejecutar el sp_RegistrarProducto. Detalles: " + ex.Message);
+            }
+        }
+        #endregion
+        /****************Fin de Producto**********************/
+
     }
 }

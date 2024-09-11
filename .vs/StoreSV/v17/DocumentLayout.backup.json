@@ -1,0 +1,195 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\HaroldGarcia\\Documents\\Store\\StoreSV\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{3A93543D-F7CC-4BFD-BFCB-A9AE3E69820C}|StoreSV\\StoreSV.csproj|C:\\Users\\HaroldGarcia\\Documents\\Store\\StoreSV\\storesv\\controllers\\marcacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A93543D-F7CC-4BFD-BFCB-A9AE3E69820C}|StoreSV\\StoreSV.csproj|solutionrelative:storesv\\controllers\\marcacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A93543D-F7CC-4BFD-BFCB-A9AE3E69820C}|StoreSV\\StoreSV.csproj|C:\\Users\\HaroldGarcia\\Documents\\Store\\StoreSV\\storesv\\views\\producto\\producto.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3A93543D-F7CC-4BFD-BFCB-A9AE3E69820C}|StoreSV\\StoreSV.csproj|solutionrelative:storesv\\views\\producto\\producto.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A93543D-F7CC-4BFD-BFCB-A9AE3E69820C}|StoreSV\\StoreSV.csproj|C:\\Users\\HaroldGarcia\\Documents\\Store\\StoreSV\\storesv\\controllers\\productocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A93543D-F7CC-4BFD-BFCB-A9AE3E69820C}|StoreSV\\StoreSV.csproj|solutionrelative:storesv\\controllers\\productocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A93543D-F7CC-4BFD-BFCB-A9AE3E69820C}|StoreSV\\StoreSV.csproj|C:\\Users\\HaroldGarcia\\Documents\\Store\\StoreSV\\storesv\\views\\marca\\marca.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3A93543D-F7CC-4BFD-BFCB-A9AE3E69820C}|StoreSV\\StoreSV.csproj|solutionrelative:storesv\\views\\marca\\marca.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A93543D-F7CC-4BFD-BFCB-A9AE3E69820C}|StoreSV\\StoreSV.csproj|C:\\Users\\HaroldGarcia\\Documents\\Store\\StoreSV\\storesv\\models\\storesventities.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A93543D-F7CC-4BFD-BFCB-A9AE3E69820C}|StoreSV\\StoreSV.csproj|solutionrelative:storesv\\models\\storesventities.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A93543D-F7CC-4BFD-BFCB-A9AE3E69820C}|StoreSV\\StoreSV.csproj|c:\\users\\haroldgarcia\\documents\\store\\storesv\\storesv\\models\\cloudinaryhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A93543D-F7CC-4BFD-BFCB-A9AE3E69820C}|StoreSV\\StoreSV.csproj|solutionrelative:storesv\\models\\cloudinaryhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A93543D-F7CC-4BFD-BFCB-A9AE3E69820C}|StoreSV\\StoreSV.csproj|C:\\Users\\HaroldGarcia\\Documents\\Store\\StoreSV\\storesv\\models\\producto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A93543D-F7CC-4BFD-BFCB-A9AE3E69820C}|StoreSV\\StoreSV.csproj|solutionrelative:storesv\\models\\producto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A93543D-F7CC-4BFD-BFCB-A9AE3E69820C}|StoreSV\\StoreSV.csproj|C:\\Users\\HaroldGarcia\\Documents\\Store\\StoreSV\\storesv\\models\\categoria.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A93543D-F7CC-4BFD-BFCB-A9AE3E69820C}|StoreSV\\StoreSV.csproj|solutionrelative:storesv\\models\\categoria.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A93543D-F7CC-4BFD-BFCB-A9AE3E69820C}|StoreSV\\StoreSV.csproj|C:\\Users\\HaroldGarcia\\Documents\\Store\\StoreSV\\storesv\\models\\marca.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A93543D-F7CC-4BFD-BFCB-A9AE3E69820C}|StoreSV\\StoreSV.csproj|solutionrelative:storesv\\models\\marca.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MarcaController.cs",
+              "DocumentMoniker": "C:\\Users\\HaroldGarcia\\Documents\\Store\\StoreSV\\StoreSV\\Controllers\\MarcaController.cs",
+              "RelativeDocumentMoniker": "StoreSV\\Controllers\\MarcaController.cs",
+              "ToolTip": "C:\\Users\\HaroldGarcia\\Documents\\Store\\StoreSV\\StoreSV\\Controllers\\MarcaController.cs",
+              "RelativeToolTip": "StoreSV\\Controllers\\MarcaController.cs",
+              "ViewState": "AgIAAHMAAAAAAAAAAAAIwHsAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-05T21:18:41.692Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ProductoController.cs",
+              "DocumentMoniker": "C:\\Users\\HaroldGarcia\\Documents\\Store\\StoreSV\\StoreSV\\Controllers\\ProductoController.cs",
+              "RelativeDocumentMoniker": "StoreSV\\Controllers\\ProductoController.cs",
+              "ToolTip": "C:\\Users\\HaroldGarcia\\Documents\\Store\\StoreSV\\StoreSV\\Controllers\\ProductoController.cs",
+              "RelativeToolTip": "StoreSV\\Controllers\\ProductoController.cs",
+              "ViewState": "AgIAADIAAAAAAAAAAAAswDoAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-17T03:18:33.876Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Producto.cshtml",
+              "DocumentMoniker": "C:\\Users\\HaroldGarcia\\Documents\\Store\\StoreSV\\StoreSV\\Views\\Producto\\Producto.cshtml",
+              "RelativeDocumentMoniker": "StoreSV\\Views\\Producto\\Producto.cshtml",
+              "ToolTip": "C:\\Users\\HaroldGarcia\\Documents\\Store\\StoreSV\\StoreSV\\Views\\Producto\\Producto.cshtml",
+              "RelativeToolTip": "StoreSV\\Views\\Producto\\Producto.cshtml",
+              "ViewState": "AgIAAPMAAAAAAAAAAAAIwMUAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-08-21T00:51:49.655Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "StoreSVEntities.cs",
+              "DocumentMoniker": "C:\\Users\\HaroldGarcia\\Documents\\Store\\StoreSV\\StoreSV\\Models\\StoreSVEntities.cs",
+              "RelativeDocumentMoniker": "StoreSV\\Models\\StoreSVEntities.cs",
+              "ToolTip": "C:\\Users\\HaroldGarcia\\Documents\\Store\\StoreSV\\StoreSV\\Models\\StoreSVEntities.cs",
+              "RelativeToolTip": "StoreSV\\Models\\StoreSVEntities.cs",
+              "ViewState": "AgIAAPEAAAAAAAAAAAAAAAMBAABqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-26T00:49:32.159Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Producto.cs",
+              "DocumentMoniker": "C:\\Users\\HaroldGarcia\\Documents\\Store\\StoreSV\\StoreSV\\Models\\Producto.cs",
+              "RelativeDocumentMoniker": "StoreSV\\Models\\Producto.cs",
+              "ToolTip": "C:\\Users\\HaroldGarcia\\Documents\\Store\\StoreSV\\StoreSV\\Models\\Producto.cs",
+              "RelativeToolTip": "StoreSV\\Models\\Producto.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAcwBcAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-16T04:27:01.752Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "CloudinaryHelper.cs",
+              "DocumentMoniker": "C:\\Users\\HaroldGarcia\\Documents\\Store\\StoreSV\\StoreSV\\Models\\CloudinaryHelper.cs",
+              "RelativeDocumentMoniker": "StoreSV\\Models\\CloudinaryHelper.cs",
+              "ToolTip": "C:\\Users\\HaroldGarcia\\Documents\\Store\\StoreSV\\StoreSV\\Models\\CloudinaryHelper.cs",
+              "RelativeToolTip": "StoreSV\\Models\\CloudinaryHelper.cs",
+              "ViewState": "AgIAAFMAAAAAAAAAAAAgwBsAAABIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-30T21:22:34.818Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Categoria.cs",
+              "DocumentMoniker": "C:\\Users\\HaroldGarcia\\Documents\\Store\\StoreSV\\StoreSV\\Models\\Categoria.cs",
+              "RelativeDocumentMoniker": "StoreSV\\Models\\Categoria.cs",
+              "ToolTip": "C:\\Users\\HaroldGarcia\\Documents\\Store\\StoreSV\\StoreSV\\Models\\Categoria.cs",
+              "RelativeToolTip": "StoreSV\\Models\\Categoria.cs",
+              "ViewState": "AQIAAA8AAAAAAAAAAAAqwBsAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-17T03:13:36.916Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Marca.cs",
+              "DocumentMoniker": "C:\\Users\\HaroldGarcia\\Documents\\Store\\StoreSV\\StoreSV\\Models\\Marca.cs",
+              "RelativeDocumentMoniker": "StoreSV\\Models\\Marca.cs",
+              "ToolTip": "C:\\Users\\HaroldGarcia\\Documents\\Store\\StoreSV\\StoreSV\\Models\\Marca.cs",
+              "RelativeToolTip": "StoreSV\\Models\\Marca.cs",
+              "ViewState": "AQIAAA4AAAAAAAAAAAAqwBcAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-16T04:27:51.19Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "FloatingWindowState": {
+        "Id": "a8a28117-a46c-4ff1-8e2f-7832f58a1f78",
+        "Display": 1,
+        "X": 61,
+        "Y": 378,
+        "Width": 1328,
+        "Height": 653,
+        "WindowState": 2
+      },
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Marca.cshtml",
+              "DocumentMoniker": "C:\\Users\\HaroldGarcia\\Documents\\Store\\StoreSV\\StoreSV\\Views\\Marca\\Marca.cshtml",
+              "RelativeDocumentMoniker": "StoreSV\\Views\\Marca\\Marca.cshtml",
+              "ToolTip": "C:\\Users\\HaroldGarcia\\Documents\\Store\\StoreSV\\StoreSV\\Views\\Marca\\Marca.cshtml",
+              "RelativeToolTip": "StoreSV\\Views\\Marca\\Marca.cshtml",
+              "ViewState": "AgIAAPsAAAAAAAAAAAAAAPUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-08-21T00:33:13.605Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

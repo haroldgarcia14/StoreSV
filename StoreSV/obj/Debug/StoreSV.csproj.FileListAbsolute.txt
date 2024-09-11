@@ -51,6 +51,8 @@ C:\Users\HaroldGarcia\Documents\Store\StoreSV\StoreSV\bin\roslyn\vbc.rsp
 C:\Users\HaroldGarcia\Documents\Store\StoreSV\StoreSV\bin\roslyn\VBCSCompiler.exe
 C:\Users\HaroldGarcia\Documents\Store\StoreSV\StoreSV\bin\roslyn\VBCSCompiler.exe.config
 C:\Users\HaroldGarcia\Documents\Store\StoreSV\StoreSV\bin\Antlr3.Runtime.dll
+C:\Users\HaroldGarcia\Documents\Store\StoreSV\StoreSV\bin\CloudinaryDotNet.dll
+C:\Users\HaroldGarcia\Documents\Store\StoreSV\StoreSV\bin\dotenv.net.dll
 C:\Users\HaroldGarcia\Documents\Store\StoreSV\StoreSV\bin\EntityFramework.dll
 C:\Users\HaroldGarcia\Documents\Store\StoreSV\StoreSV\bin\EntityFramework.SqlServer.dll
 C:\Users\HaroldGarcia\Documents\Store\StoreSV\StoreSV\bin\Isopoh.Cryptography.Argon2.dll
@@ -59,6 +61,10 @@ C:\Users\HaroldGarcia\Documents\Store\StoreSV\StoreSV\bin\Isopoh.Cryptography.Se
 C:\Users\HaroldGarcia\Documents\Store\StoreSV\StoreSV\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\Users\HaroldGarcia\Documents\Store\StoreSV\StoreSV\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\HaroldGarcia\Documents\Store\StoreSV\StoreSV\bin\Newtonsoft.Json.dll
+C:\Users\HaroldGarcia\Documents\Store\StoreSV\StoreSV\bin\System.Buffers.dll
+C:\Users\HaroldGarcia\Documents\Store\StoreSV\StoreSV\bin\System.Memory.dll
+C:\Users\HaroldGarcia\Documents\Store\StoreSV\StoreSV\bin\System.Numerics.Vectors.dll
+C:\Users\HaroldGarcia\Documents\Store\StoreSV\StoreSV\bin\System.Runtime.CompilerServices.Unsafe.dll
 C:\Users\HaroldGarcia\Documents\Store\StoreSV\StoreSV\bin\System.Web.Helpers.dll
 C:\Users\HaroldGarcia\Documents\Store\StoreSV\StoreSV\bin\System.Web.Mvc.dll
 C:\Users\HaroldGarcia\Documents\Store\StoreSV\StoreSV\bin\System.Web.Optimization.dll
@@ -67,11 +73,16 @@ C:\Users\HaroldGarcia\Documents\Store\StoreSV\StoreSV\bin\System.Web.WebPages.De
 C:\Users\HaroldGarcia\Documents\Store\StoreSV\StoreSV\bin\System.Web.WebPages.dll
 C:\Users\HaroldGarcia\Documents\Store\StoreSV\StoreSV\bin\System.Web.WebPages.Razor.dll
 C:\Users\HaroldGarcia\Documents\Store\StoreSV\StoreSV\bin\WebGrease.dll
+C:\Users\HaroldGarcia\Documents\Store\StoreSV\StoreSV\bin\CloudinaryDotNet.xml
 C:\Users\HaroldGarcia\Documents\Store\StoreSV\StoreSV\bin\EntityFramework.xml
 C:\Users\HaroldGarcia\Documents\Store\StoreSV\StoreSV\bin\EntityFramework.SqlServer.xml
 C:\Users\HaroldGarcia\Documents\Store\StoreSV\StoreSV\bin\Isopoh.Cryptography.Argon2.xml
 C:\Users\HaroldGarcia\Documents\Store\StoreSV\StoreSV\bin\Isopoh.Cryptography.Blake2b.xml
 C:\Users\HaroldGarcia\Documents\Store\StoreSV\StoreSV\bin\Isopoh.Cryptography.SecureArray.xml
+C:\Users\HaroldGarcia\Documents\Store\StoreSV\StoreSV\bin\System.Buffers.xml
+C:\Users\HaroldGarcia\Documents\Store\StoreSV\StoreSV\bin\System.Memory.xml
+C:\Users\HaroldGarcia\Documents\Store\StoreSV\StoreSV\bin\System.Numerics.Vectors.xml
+C:\Users\HaroldGarcia\Documents\Store\StoreSV\StoreSV\bin\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\HaroldGarcia\Documents\Store\StoreSV\StoreSV\bin\System.Web.Helpers.xml
 C:\Users\HaroldGarcia\Documents\Store\StoreSV\StoreSV\bin\System.Web.Mvc.xml
 C:\Users\HaroldGarcia\Documents\Store\StoreSV\StoreSV\bin\System.Web.Optimization.xml
