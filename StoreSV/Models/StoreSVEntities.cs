@@ -9,6 +9,7 @@ using System.Linq;
 using System.Reflection.Emit;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.UI.WebControls;
 
 namespace StoreSV.Models
 {
@@ -27,6 +28,8 @@ namespace StoreSV.Models
         public DbSet<Marca> Marcas { get; set; }
 
         public DbSet<Producto> Productos { get; set; }
+
+        //modelos de la tabla para el ingreso de productos Jeans-pantalones
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -192,7 +195,7 @@ namespace StoreSV.Models
 
         //Registrar
         public async Task CreateProductoAsync(string nombre, int IdCategoria, int IdMarca, decimal precio, 
-            int stock, string rutaImagen, string nombreImagen, bool activo)
+            int stock, string rutaImagen, string nombreImagen, decimal resultadoIVA, bool activo)
         {
             try
             {
@@ -213,9 +216,10 @@ namespace StoreSV.Models
                 var StockParam = new SqlParameter("@Stock", SqlDbType.Int) { Value = stock };
                 var RutaImagenParam = new SqlParameter("@RutaImagen", SqlDbType.VarChar, -1) {Value = rutaImagen ?? (object)DBNull.Value };
                 var NombreImagenParam = new SqlParameter("@NombreImagen", nombreImagen);
+                var ResultadoIVAParam = new SqlParameter("@Resultado_IVA", resultadoIVA);
                 var ActivoParam = new SqlParameter("@Activo", activo);
 
-                await Database.ExecuteSqlCommandAsync("EXECUTE sp_RegistrarProducto @Nombre, @IdCategoria, @IdMarca, @Precio, @Stock, @RutaImagen, @NombreImagen, @Activo",NombreParam,IdCategoriaParam,IdMarcaParam,PrecioParam,StockParam,RutaImagenParam,NombreImagenParam,ActivoParam);
+                await Database.ExecuteSqlCommandAsync("EXECUTE sp_RegistrarProducto @Nombre, @IdCategoria, @IdMarca, @Precio, @Stock, @RutaImagen, @NombreImagen, @Resultado_IVA, @Activo", NombreParam,IdCategoriaParam,IdMarcaParam,PrecioParam,StockParam,RutaImagenParam,NombreImagenParam, ResultadoIVAParam, ActivoParam);
             }
             catch (Exception ex)
             {
@@ -224,7 +228,7 @@ namespace StoreSV.Models
         }
 
         //Editar
-        public async Task EditProductAsync(int id, string nombre, int IdCategoria, int IdMarca, decimal precio, int stock, string rutaImagen, string nombreImagen, bool activo)
+        public async Task EditProductAsync(int id, string nombre, int IdCategoria, int IdMarca, decimal precio, int stock, string rutaImagen, string nombreImagen, decimal resultadoIVA, bool activo)
         {
             try
             {
@@ -236,9 +240,10 @@ namespace StoreSV.Models
                 var StockParam = new SqlParameter("@Stock", SqlDbType.Int) { Value = stock };
                 var RutaImagenParam = new SqlParameter("@RutaImagen", SqlDbType.VarChar, -1) { Value = rutaImagen ?? (object)DBNull.Value };
                 var NombreImagenParam = new SqlParameter("@NombreImagen", nombreImagen);
+                var ResultadoIVAParam = new SqlParameter("@Resultado_IVA", resultadoIVA);
                 var ActivoParam = new SqlParameter("@Activo", activo);
 
-                await Database.ExecuteSqlCommandAsync("EXECUTE sp_EditarProducto @IdProducto, @Nombre, @IdCategoria, @IdMarca, @Precio, @Stock, @RutaImagen, @NombreImagen, @Activo", idParam, NombreParam, IdCategoriaParam, IdMarcaParam, PrecioParam, StockParam, RutaImagenParam, NombreImagenParam, ActivoParam);
+                await Database.ExecuteSqlCommandAsync("EXECUTE sp_EditarProducto @IdProducto, @Nombre, @IdCategoria, @IdMarca, @Precio, @Stock, @RutaImagen, @NombreImagen, @Resultado_IVA, @Activo", idParam, NombreParam, IdCategoriaParam, IdMarcaParam, PrecioParam, StockParam, RutaImagenParam, NombreImagenParam, ResultadoIVAParam, ActivoParam);
             }
             catch(Exception ex)
             {

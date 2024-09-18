@@ -208,7 +208,10 @@
     </Compile>
     <Compile Include="Models\Categoria.cs" />
     <Compile Include="Models\CloudinaryHelper.cs" />
+    <Compile Include="Models\Genero.cs" />
     <Compile Include="Models\Marca.cs" />
+    <Compile Include="Models\MP_Femenino.cs" />
+    <Compile Include="Models\MP_Masculino.cs" />
     <Compile Include="Models\Producto.cs" />
     <Compile Include="Models\StoreSVEntities.cs" />
     <Compile Include="Models\Usuario.cs" />

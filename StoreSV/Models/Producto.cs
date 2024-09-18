@@ -23,6 +23,8 @@ namespace StoreSV.Models
             public int Stock { get; set; }
             public string RutaImagen { get; set; }
             public string NombreImagen { get; set; }
+            public decimal IVAPorcentaje { get; set; }
+            public decimal Resultado_IVA { get; set; }
             public bool Activo { get; set; }
     }
 }

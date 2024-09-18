@@ -30,10 +30,11 @@ namespace StoreSV.Controllers
         public ActionResult Producto()
         {
             //var producto = databaseProducto
+            
             var ProductoActivos = databaseProducto.Productos.Where(a => a.Activo).Include(c => c.categoria).Include(m => m.marca).ToList();
-
-            ViewBag.Categorias = new SelectList(databaseProducto.Categorias.ToList(), "IdCategoria", "Descripcion");
-            ViewBag.Marcas = new SelectList(databaseProducto.Marcas.ToList(), "IdMarca", "Descripcion");
+            
+            ViewBag.Categorias = new SelectList(databaseProducto.Categorias.Where(c => c.Activo).ToList(), "IdCategoria", "Descripcion");
+            ViewBag.Marcas = new SelectList(databaseProducto.Marcas.Where(m => m.Activo).ToList(), "IdMarca", "Descripcion");
 
             return View(ProductoActivos);
         }
@@ -57,8 +58,8 @@ namespace StoreSV.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> CreateAndEditProduct(Producto producto, HttpPostedFileBase imagen)
         {
-            ViewBag.Categorias = new SelectList(await databaseProducto.Categorias.ToListAsync(), "IdCategoria", "Descripcion");
-            ViewBag.Marcas = new SelectList(await databaseProducto.Marcas.ToListAsync(), "IdMarca", "Descripcion");
+            ViewBag.Categorias = new SelectList(await databaseProducto.Categorias.Where(c => c.Activo).ToListAsync(), "IdCategoria", "Descripcion");
+            ViewBag.Marcas = new SelectList(await databaseProducto.Marcas.Where(m => m.Activo).ToListAsync(), "IdMarca", "Descripcion");
 
             Console.WriteLine(producto);
             if(producto.IdProducto > 0)
@@ -106,10 +107,16 @@ namespace StoreSV.Controllers
                         producto.RutaImagen = productoExistente.RutaImagen;
                         producto.NombreImagen = productoExistente.NombreImagen;
                     }
-                    
+
+                    //calculo del IVA
+                    decimal IVA = 0.13M;
+                    var resultadoconiva = producto.Precio + (producto.Precio * IVA);
+                    producto.Resultado_IVA = resultadoconiva;
+                    Console.WriteLine(producto.Resultado_IVA);
+
                     try
                     {
-                        await databaseProducto.EditProductAsync(producto.IdProducto, producto.Nombre, producto.IdCategoria, producto.IdMarca, producto.Precio, producto.Stock, producto.RutaImagen, producto.NombreImagen, producto.Activo);
+                        await databaseProducto.EditProductAsync(producto.IdProducto, producto.Nombre, producto.IdCategoria, producto.IdMarca, producto.Precio, producto.Stock, producto.RutaImagen, producto.NombreImagen, resultadoconiva, producto.Activo);
                         return RedirectToAction(nameof(Producto));
                     }
                     catch(Exception ex)
@@ -150,16 +157,23 @@ namespace StoreSV.Controllers
                             ModelState.AddModelError("", "Error al subir la imagen:" + ex.Message);
                             return View(producto);
                             
-                            //return Json(new { success = false, message = "Error al subir la imagen: " + ex.Message });
                         }
                     }
 
                     producto.RutaImagen = rutaImagen;
                     producto.NombreImagen = nombreImagen;
+                    Console.WriteLine(producto.RutaImagen);
+
+
+                    //calculo del IVA
+                    var IVA = 0.13M;
+                    var resultadoconiva = producto.Precio + (producto.Precio * IVA);
+                    producto.Resultado_IVA = resultadoconiva;
+                    Console.WriteLine(producto.Resultado_IVA);
 
                     try
                     {
-                        await databaseProducto.CreateProductoAsync(producto.Nombre, producto.IdCategoria, producto.IdMarca, producto.Precio, producto.Stock, producto.RutaImagen, producto.NombreImagen, producto.Activo);
+                        await databaseProducto.CreateProductoAsync(producto.Nombre, producto.IdCategoria, producto.IdMarca, producto.Precio, producto.Stock, producto.RutaImagen, producto.NombreImagen, resultadoconiva, producto.Activo);
                         return RedirectToAction(nameof(Producto));
                         //return Json(new { success = true });
                     }catch(Exception ex)
@@ -183,8 +197,8 @@ namespace StoreSV.Controllers
                 return HttpNotFound();
             }
 
-            ViewBag.Categorias = new SelectList(await databaseProducto.Categorias.ToListAsync(), "IdCategoria", "Descripcion");
-            ViewBag.Marcas = new SelectList(await databaseProducto.Marcas.ToListAsync(), "IdMarca", "Descripcion");
+            ViewBag.Categorias = new SelectList(await databaseProducto.Categorias.Where(c => c.Activo).ToListAsync(), "IdCategoria", "Descripcion");
+            ViewBag.Marcas = new SelectList(await databaseProducto.Marcas.Where(m => m.Activo).ToListAsync(), "IdMarca", "Descripcion");
 
             return View(producto);
         }
